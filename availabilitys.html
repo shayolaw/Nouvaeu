@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Availability</title>
+	</head>
+	<body>
+		<form id='available'>
+		<label for="date">Date:</label><input type="date" id="date" min='2019-01-01' name="date">
+		<label for="duration">Duration:</label><input type="number" name="duration">
+		<label for="adults">Number of Adults:</label><input type="number" name="adults">
+		<label for="child">Number of Children:</label><input type="number" name="child">
+		<button type="submit">Check Availability</button>
+	</form>
+	<div id="area"></div>
+	</body>
+	<script src="https://code.jquery.com/jquery-2.2.1.min.js"
+            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+            crossorigin="anonymous"></script>
+	<script type="text/javascript">
+		var today = new Date();
+		var day = today.getDate();
+		var month = today.getMonth() +1;
+		var year = today.getFullYear();
+		if(day<10){
+			day = '0' + day;
+		}
+		if(month<10){
+			month = '0' + month;
+		}
+		var date = year+'-'+month+'-'+day;
+		document.getElementById('date').setAttribute('min',date);
+
+		$('#available').on('submit',function(e){
+			e.preventDefault();
+			$.ajax({
+				type:'GET',
+				url:'/availability',
+				data:$(this).serialize(),
+				success: function(data){
+					var command="<h2>Available Rooms:</h2>";
+					for(var i=0;i<data.length;i++){
+						command=command + '<a href="/select?names='+data[i].dat.names+'&date='+data[i].dates[0]+'&duration='+data[i].dates[1]+'">'+data[i].dat.names+'</a><br>'
+					}
+					$('#area').html(command);
+				}
+			})
+		})
+	</script>
+</html>
