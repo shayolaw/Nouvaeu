@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registeration</title>
+	<link rel="stylesheet" type="text/css" href="registeration-styles.css">
+</head>
+<body>
+	<div class="logo"><img width="200px"src="Images\Login-logo-02.jpg" alt="logo"></div>
+	<center><div id="form-area">
+	<form id="register" action="/register" method="post">
+	<h5>ACCOUNT REGISTERATION</h5>
+	<label for="first">First-name</label><input type="text" name="first">
+	<label for="username">Last-name</label><input type="text" name="username">
+	<label for="position">Position</label>
+	<select name="position" placeholder="Manager">
+		<option value="manager">Manager</option>
+		<option value="senior-manager">Senior-Manager</option>
+		<option value="assistant-manager">Assistant-Manager</option>
+		<option value="supervisor">Supervisor</option>
+		<option value="staff">Regular Staff</option>
+	</select>
+	<label for="password">Password:</label><input type="password" name="password">
+	<button type="submit">Register</button>
+</form></div></center>
+
+</body>
+</html>

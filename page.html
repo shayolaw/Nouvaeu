@@ -1,0 +1,79 @@
+<!Doctype html>
+<html>
+	<head>
+		<TITLE>Nouvaeu Hotel</TITLE>
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+		<section class="top"> 
+		<nav>
+			<ul>
+				<div class="logo"><li><img width="150px"src="Images\Hotel_Logo.jpg" alt="logo"></li></div>
+				<div class="links"><li><a href="#">HOME</a></li>
+				<li><a href="#">ROOM</a></li>
+				<li><a href="#">ABOUT US</a></li>
+				<li><a href="#">CONTACT</a></li></div>
+			</ul>
+		</nav>
+		
+		
+		</section>
+		<section class="text-over">
+		<center><p><strong>NOUVAEU HOTEL</strong></p></center>
+		<center><p class="small">Amazing Services,<br>Location & Facilities</p></center>
+		</section>
+		<section class="date">
+			<div class="day"><center><p id="day">15</p></center></div>
+			<div class="month"><center><p id="month">03</p></center></div>
+			<div class="year"><center><p id="year"style="margin-top:4px ">19</p></center></div>
+		</section>
+		<div class="book-forms">
+		<section class="book-form">
+			<form id='available'>
+				<input type="date" name="date" placeholder="Select Arrival Date">
+				<input type="number" name="duration" placeholder="Duration">
+				<input type="number" name="adults" placeholder="Adults">
+				<input type="number" name="child" placeholder="Children">
+				<button type="submit">Check Availability</button>
+			</form>
+			<div id="area"></div>
+		</section>
+	</div>
+	</body>
+	<script src="https://code.jquery.com/jquery-2.2.1.min.js"
+            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+            crossorigin="anonymous"></script>
+	<script type="text/javascript">
+		var today = new Date();
+		var day = today.getDate();
+		var month = today.getMonth() +1;
+		var year = today.getFullYear();
+		$('#day').text(day);
+		$('#month').text(month);
+		$('#year').text(year);
+		if(day<10){
+			day = '0' + day;
+		}
+		if(month<10){
+			month = '0' + month;
+		}
+		var date = year+'-'+month+'-'+day;
+		document.getElementById('date').setAttribute('min',date);
+
+		$('#available').on('submit',function(e){
+			e.preventDefault();
+			$.ajax({
+				type:'GET',
+				url:'/availability',
+				data:$(this).serialize(),
+				success: function(data){
+					var command="<h2>Available Rooms:</h2>";
+					for(var i=0;i<data.length;i++){
+						command=command + '<a href="/select?names='+data[i].dat.names+'&date='+data[i].dates[0]+'&duration='+data[i].dates[1]+'">'+data[i].dat.names+'</a><br>'
+					}
+					$('#area').html(command);
+				}
+			})
+		})
+	</script>
+</html>

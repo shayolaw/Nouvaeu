@@ -1,0 +1,191 @@
+.anim {
+  animation: pop-up;
+  animation-duration: 2s; }
+
+button:hover {
+  cursor: pointer;
+  background-color: black;
+  border: 2px solid #701D3B;
+  transition: 1s;
+  transform: rotatex(360deg); }
+
+#services {
+  margin-top: 10%;
+  margin-left: 5%; }
+  #services h5 {
+    font-family: gilroy;
+    font-size: 17px;
+    color: #A3A3A3;
+    letter-spacing: 5px; }
+  #services p {
+    font-family: gilroy;
+    font-size: 50px;
+    letter-spacing: 5px; }
+  #services .line {
+    margin-left: 10px;
+    background-color: #A3A3A3;
+    width: 100px;
+    height: 3px; }
+  #services .serv {
+    display: flex;
+    align-items: center; }
+
+.service {
+  margin-left: 5%;
+  display: flex;
+  flex-direction: column; }
+  .service h6 {
+    font-family: gilroy;
+    font-weight: 100;
+    font-size: 30px;
+    color: black; }
+  .service .fas, .service .fa {
+    color: #380F1C;
+    font-size: 30px;
+    margin-right: 10px; }
+  .service p {
+    margin-top: -20px;
+    margin-left: 40px;
+    font-family: gilroy;
+    font-size: 20px; }
+
+#service-list {
+  margin-top: -20px;
+  margin-left: 2%;
+  display: grid;
+  grid-template-columns: 32% 32% 32%; }
+
+#suites {
+  margin-top: 10%;
+  margin-left: 5%; }
+  #suites h5 {
+    font-family: gilroy;
+    font-size: 17px;
+    color: #A3A3A3;
+    letter-spacing: 5px; }
+  #suites p {
+    font-family: gilroy;
+    font-size: 50px;
+    letter-spacing: 5px; }
+  #suites .line {
+    margin-left: 10px;
+    background-color: #A3A3A3;
+    width: 100px;
+    height: 3px; }
+  #suites .serv {
+    display: flex;
+    align-items: center; }
+
+#rooms-text {
+  margin-left: 5%;
+  font-family: gilroy;
+  font-size: 17px; }
+
+#rooms {
+  margin-top: 5%;
+  padding-left: 5%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: columns; }
+
+.room {
+  width: 350px;
+  margin-right: 62px;
+  background-color: white;
+  height: 500px; }
+  .room img {
+    width: 350px;
+    height: 200px; }
+  .room h4 {
+    margin-left: 5%;
+    font-family: gilroy;
+    font-weight: 100;
+    font-size: 24px; }
+  .room h6 {
+    margin-left: 5%;
+    font-family: gilroy;
+    font-size: 50px;
+    margin-top: -15px;
+    margin-bottom: -5px; }
+    .room h6 .per {
+      font-size: 18px;
+      font-weight: 100; }
+    .room h6 .dollar {
+      font-size: 18px;
+      font-weight: 100; }
+  .room p {
+    margin-left: 5%;
+    font-size: 18px;
+    font-family: gilroy; }
+    .room p .value {
+      color: grey;
+      margin-left: 1%; }
+
+.controls {
+  margin-top: 2%;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .controls :hover {
+    cursor: pointer; }
+  .controls span {
+    margin-right: 10px; }
+
+.suites {
+  background-color: #EAEAEA;
+  padding-bottom: 2%;
+  animation: fade;
+  animation-duration: 5s; }
+
+footer {
+  padding-top: 3%;
+  padding-bottom: 5%;
+  color: white;
+  background-color: #380F1C;
+  padding-left: 5%;
+  font-family: gilroy;
+  display: flex;
+  justify-content: center; }
+  footer p {
+    font-size: 14px; }
+  footer h5 {
+    font-weight: 100;
+    font-size: 17px; }
+  footer .details {
+    display: grid;
+    grid-template-columns: 30px 300px;
+    column-gap: 30px;
+    align-items: center; }
+  footer #about {
+    width: 30%;
+    margin-right: 3%; }
+  footer #contact {
+    width: 30%;
+    margin-right: 3%; }
+  footer #social {
+    width: 30%; }
+    footer #social a {
+      color: white;
+      margin-right: 40px; }
+      footer #social a span {
+        font-size: 20px; }
+  footer button {
+    font-family: gilroy;
+    background-color: #701D3B;
+    border: 2px solid #D33777;
+    width: 40%;
+    height: 50px;
+    color: white; }
+
+@keyframes pop-up {
+  0% {
+    margin-top: 300px; }
+  100% {
+    margin-top: 0px; } }
+@keyframes fade {
+  0% {
+    opacity: 0.0; }
+  100% {
+    opacity: 1.0; } }
+
+/*# sourceMappingURL=skills.css.map */

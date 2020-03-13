@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hemed</title>
+	<link rel="stylesheet" type="text/css" href="staff-style.css">
+</head>
+<body>
+
+<div class="dashboard">
+	<div id="left">
+		<h5>We are Nouvaeu</h5>
+		<p>Welcome back to your account</p>
+		<h5 id="info" style="font-size:15px;font-weight: 100;font-family: arial;margin-bottom: 15px;">Room Creation</h5>
+		<div id="here">
+		<form action="/room" method="post" enctype="multipart/form-data"><label for="names">Room Name:</label><input type="text" name="names" ><label for="max">Max Occupancy:</label><input type="number" name="max" ><label for="price">Price:</label><input type="number" name="price" ><label for="size">Room Size:</label><input type="text" name="sizes" ><label for="bed">Bed Size:</label><input type="text" name="bed" ><label for="number">Number:</label><input type="text" name="number" ><div class=image><label for="pic">Image:</label><input type="file" name="pic" class="image"/></div><button type="submit">Submit</button></form></div>
+		<div class="other-routes">
+		<p id="edit-room">Edit room</p><p>|</p><p id="delete-room">Delete Room</p></div>
+		<div id="display">
+	
+</div>
+		
+		
+	</div>
+	<div id="right">
+		<nav>
+			<ul>
+				<li id="create-room">Rooms</li>
+				<li id="edit-res">Reservations</li>
+				<li><a href='/book' style="text-decoration: none;color:#CCCCCC">Site</a></li>
+				<li>Sign-out</li>
+			</ul>
+		</nav>
+		<div class="banner">
+			<div class="clock">
+				<center><div class="tick"></div>
+					</center>
+					<div id="time">
+					<p class="month"></p>
+					<p class="day" style="font-size:50px;margin-top: -5px;"></p>
+					<p class="year"></p>
+				</div>
+				<center><div class="tick" style="margin-top:-22px"></div></center>
+				
+			</div>
+			<div class="announcements">
+				<div id="header">
+					<center><p>Announcements</p></center>
+				</div>
+				<div style="margin-top:10px;">
+				<h5>Description</h5>
+				<div id="line"></div>
+				<p>lorem ipsum lorem anni<br>
+					lorem ipsum dolor fanni<br>
+					meet yar jalan attahiri<br>
+					mechari anni<br></p></div>
+			</div>
+			<div id="image">
+				
+			</div>
+		</div>
+		
+			
+		
+	</div>
+</div>
+</body>
+ <script src="https://code.jquery.com/jquery-2.2.1.min.js"
+            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+            crossorigin="anonymous"></script>
+<script type="text/javascript">
+	var today = new Date();
+	var day = today.getDate();
+		var month = today.getMonth() +1;
+		var year = today.getFullYear();
+		
+		if(day<10){
+			day = '0' + day;
+		}
+		if(month<10){
+			month = '0' + month;
+		}
+		$('.day').text(day);
+		$('.year').text(year.toString().substr(-2));
+		$('.month').text(month);
+	
+
+
+$('#create-room').on('click',function(){
+	$('#here').html('<form action="/room" method="post" enctype="multipart/form-data"><label for="names">Room Name:</label><input type="text" name="names" ><label for="max">Max Occupancy:</label><input type="number" name="max" ><label for="price">Price:</label><input type="number" name="price" ><label for="size">Room Size:</label><input type="text" name="sizes" ><label for="bed">Bed Size:</label><input type="text" name="bed" ><label for="number">Number:</label><input type="text" name="number" ><div class="image"><label for="pic">Image:</label><input type="file" name="pic" class="image"/></div><button type="submit">Submit</button></form>');
+	$('#info').text('Create Room');
+})
+$('#edit-room').on('click',function(){
+	$('#here').html('<form action="/room" method="get"><label for="names">Room Name:</label><input type="text" name="names" ><label for="max">Max Occupancy:</label><input type="number" name="max" ><label for="price">Price:</label><input type="number" name="price" ><label for="size">Room Size:</label><input type="text" name="sizes" ><label for="bed">Bed Size:</label><input type="text" name="bed" ><label for="number">Number:</label><input type="text" name="number" ><button type="submit">Submit</button></form>');
+	$('#info').text('Edit Room');
+	
+});
+
+$('#delete-room').on('click',function(){
+	$('#here').html('<form id="delete"><label for="names">Room Name:</label><input type="text" name="names" placeholder="Names"><button type="submit">Delete</button></form><br><div id="deletedisplay"></div>');
+	$('#info').text('Delete Room');
+	$('#delete').on('submit',function(e){
+		alert($(this).serialize());
+		e.preventDefault();
+		var url ='/room';
+		$.ajax({
+		type:"DELETE",
+		url:url,
+		data:$(this).serialize(),
+		success:function(data)
+            {
+            	$('#display').html('<center><p>'+data+'</p></center>')
+            }
+			
+		})
+	})
+})
+$('#edit-res').on('click',function(){
+	$('#here').html('<form id="res-update"><label for="_id">ID:</label><input type="text" name="_id"><label for="date">Date:</label><input type="date" id="date" min="2019-01-01" name="date"><label for="duration">Duration:</label><input type="number" name="duration"><label for="adults">Number of Adults:</label><input type="number" name="adults"><label for="child">Number of Children:</label><input type="number" name="child"><button type="submit">Update</button></form><br><div id="updatereserve"></div>');
+	$('.other-routes').html('<p id="check-res">Check reservation</p><p>|</p><p id="delete-res">Delete Reservation</p></div>');
+	$('#info').text('Edit Reservation');
+$('#res-update').on('submit',function(e){
+			const urlParams = new URLSearchParams($(this).serialize());
+			var id = urlParams.get('_id') ;
+			e.preventDefault()
+			$.ajax({
+				type:'GET',
+				url:'/availability',
+				data:$(this).serialize(),
+				success: function(data){
+					alert(data);
+					var command="<h2>Available Rooms:</h2>";
+					for(var i=0;i<data.length;i++){
+						command=command + '<div><a href="/update?id='+id+'&names='+data[i].dat.names+'&date='+data[i].dates[0]+'&duration='+data[i].dates[1]+'">'+data[i].dat.names+'</a><br></div>'
+					}
+					$('#display').html(command);
+				}
+			})
+		})
+$('#delete-res').on('click',function(){
+	$('#here').html('<form id="res-remove"><label for="_id">ID:</label><input type="text" name="_id"><button type="submit">Cancel</button></form><br><div id="deletedreserve"></div>')
+	$('#info').text('Delete Reservation');
+$('#res-remove').on('submit',function(e){
+		e.preventDefault();
+		alert('here')
+		var url ='/remove-reservation';
+		$.ajax({
+		type:"DELETE",
+		url:url,
+		data:$(this).serialize(),
+		success:function(data)
+            {
+            	$('#display').html('<p>'+data+'</p>')
+            }
+			
+		})
+	})
+});
+
+$('#check-res').on('click',function(){
+	$('#here').html('<form id="check-reserve"><label for="id">ID:</label><input type="text" name="id"><button type="submit">Check</button></form><br>');
+	$('#info').text('Check Reservation');
+	$('#check-reserve').on('submit',function(e){
+	e.preventDefault()
+	$.ajax({
+		type:'GET',
+		url:'/check-reserve',
+		data:$(this).serialize(),
+		success:function(data){
+			if(data=='No Reservation found'){
+				$('#display').html('<p>'+data+'</p>')
+			}
+			else{
+			$('#display').html('<div><div class="infon"><h5> Name:</h5><p>'+data.names+'</p></div><div class="infon"><h5> Room:</h5><p>'+data.room+'</p></div><div class="infon"><h5> Duration:</h5><p>'+data.duration+'</p></div><div class="infon"><h5> Date:</h5><p>'+data.date+'</p></div></div>');	
+			}
+		}
+	})
+})
+});
+});
+	
+
+</script>
+</html>
