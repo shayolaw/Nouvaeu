@@ -15,7 +15,7 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "datetime": "0.0.3",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "express-session": "^1.15.6",
     "fs": "0.0.1-security",
     "mongodb": "^2.2.33",
